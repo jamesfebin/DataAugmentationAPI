@@ -2,9 +2,11 @@
 import os
 import csv
 import uuid
-from flask import Flask, request, redirect, url_for, abort, make_response, jsonify
+from flask import Flask, request, redirect, url_for, abort, make_response, jsonify,send_from_directory
 from werkzeug import secure_filename
 from dataapi import DataAPIS
+app = Flask(__name__, static_url_path='')
+
 
 dataAPI = DataAPIS()
 
@@ -15,6 +17,16 @@ ALLOWED_EXTENSIONS = set(['csv'])
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
+
+
+@app.route('/outputs/<path:path>')
+def send_js(path):
+    return send_from_directory('outputs', path)
+
+
+def uploaded_file(filename):
+    return send_from_directory(app.config['OUTPUT_FOLDER'],
+                               filename)
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -34,7 +46,7 @@ def init_file(filepath):
     try:
         with open(filepath, 'wb') as csvfile:
             writer = csv.writer(csvfile, delimiter=',',quoting=csv.QUOTE_MINIMAL)
-            writer.writerows([['Email']])
+            writer.writerows([['Email','Status']])
             print 'file initialized'
     except Exception as e:
         print e
@@ -50,7 +62,7 @@ def process_file(filepath,filename):
             for row in reader:
                email = row['Email']
                briteverify_response = dataAPI.briteverify(email)
-               append_to_file(output_file_path,[[briteverify_response]])
+               append_to_file(output_file_path,[[row['Email'], briteverify_response]])
     except Exception as e:
         print e
         abort(422)
@@ -70,7 +82,7 @@ def post_api():
                 filepath = os.path.join(app.config['UPLOAD_FOLDER'], unique_name+filename)
                 file.save(filepath)
                 process_file(filepath,unique_name+filename)
-                return 'awesome'
+                return send_from_directory('outputs', unique_name+filename)
             else:
                 abort(422)
         except Exception as e:
