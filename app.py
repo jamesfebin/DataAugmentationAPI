@@ -2,9 +2,11 @@
 import os
 import csv
 import uuid
+import json
 from flask import Flask, request, redirect, url_for, abort, make_response, jsonify,send_from_directory
 from werkzeug import secure_filename
 from dataapi import DataAPIS
+
 
 app = Flask(__name__, static_url_path='')
 
@@ -65,6 +67,7 @@ def process_file(filepath,filename):
                briteverify_response = dataAPI.briteverify(email)
                solve360_response = dataAPI.solve360(email)
                fullcontact_response = dataAPI.fullcontact(email)
+               fullcontact_response = json.dumps(fullcontact_response)
                append_to_file(output_file_path,[[row['Email'], briteverify_response,solve360_response,fullcontact_response]])
     except Exception as e:
         print e

@@ -64,7 +64,7 @@ class DataAPIS:
             return 'API ERROR'
     def fullcontact(self,email):
         try:
-            url='https://api.fullcontact.com/v2/person/lookup.json'
+            url='https://api.fullcontact.com/v2/person.json'
             kwargs = {}
             kwargs['apiKey'] = self.fullcontact_API_KEY
             kwargs['email'] = email

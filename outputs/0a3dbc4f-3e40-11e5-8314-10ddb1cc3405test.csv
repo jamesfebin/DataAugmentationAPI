@@ -1,0 +1,5 @@
+Email,BitVerify,Solve360,Full Contact
+jamesfebin@gmail.com,valid,API ERROR,"{u'status': 404, u'message': u'Endpoint not found. Please check http://www.fullcontact.com/developer/docs/ or contact support@fullcontact.com', u'requestId': u'bdb67141-e117-45a0-8348-617b87623221'}"
+fabgeeks@gmail.com,valid,API ERROR,"{u'status': 404, u'message': u'Endpoint not found. Please check http://www.fullcontact.com/developer/docs/ or contact support@fullcontact.com', u'requestId': u'ae238091-2fb1-4b51-859a-cf7eb337fdac'}"
+febinjohnjames@gmail.com,valid,API ERROR,"{u'status': 404, u'message': u'Endpoint not found. Please check http://www.fullcontact.com/developer/docs/ or contact support@fullcontact.com', u'requestId': u'94092147-d4e2-4d4a-a9d6-ef7c248e1a71'}"
+febin@boutline.com,valid,API ERROR,"{u'status': 404, u'message': u'Endpoint not found. Please check http://www.fullcontact.com/developer/docs/ or contact support@fullcontact.com', u'requestId': u'18a2c9a3-2b5c-4f68-92ce-ae61e955a993'}"
